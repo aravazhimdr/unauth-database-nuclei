@@ -1,0 +1,23 @@
+id: unauth-hbase
+
+info:
+  name: Unauthenticated Admin Panel - Riak
+  author: aravazhimdr
+  severity: high
+  tags: riak,unauth,database
+  description: Unauthenticated Admin Panel - Riak.
+  #Port - 8089
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}:8098/admin/"
+      - "{{BaseURL}}:8098/stats"
+      #http://localhost:8098/stats
+
+    matchers:
+      - type: word
+        words:
+          - "riak_control_version"
+          - "<title>Riak Explorer"
+        condition: or

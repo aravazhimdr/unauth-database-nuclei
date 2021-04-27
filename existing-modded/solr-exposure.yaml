@@ -1,0 +1,25 @@
+id: solr-exposure
+
+info:
+  name: Apache Solr Exposure - Old and New version
+  author: aravazhimdr
+  severity: high
+  tags: panel,unauth,solr,database
+  #Port - 8983
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/solr/"
+      - "{{BaseURL}}/admin/"
+      - "{{BaseURL}}:8983/"
+      - "{{BaseURL}}:8983/solr/"
+      - "{{BaseURL}}:8983/admin/"
+    matchers:
+      - type: word
+        words:
+          - "<title>Solr Admin</title>"
+          - "<title>Solr admin page</title>"
+          - "<title>Welcome to Solr</title>"
+        condition: or

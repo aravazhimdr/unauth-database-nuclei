@@ -1,0 +1,25 @@
+id: unauth-ravendb
+
+info:
+  name: Unauthenticated RavenDB Web UI
+  author: aravazhimdr
+  severity: high
+  tags: ravendb,unauth,database
+  description: Unauthenticated RavenDB Web UI.
+  #Port - 8080
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}:8080/studio/index.html"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "Raven.Studio"
+          #- "version"
+        #condition: and

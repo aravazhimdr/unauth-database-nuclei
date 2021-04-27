@@ -1,0 +1,24 @@
+id: elasticsearch
+
+info:
+  name: ElasticSearch Information Disclosure
+  author: Shine
+  severity: low
+  tags: elastic,unauth
+  #Port - 9200
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}:9200/_cat/indices?v'
+      - '{{BaseURL}}:9200/_all/_search'
+      - '{{BaseURL}}/_all/_search'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - '"took":'
+      - type: status
+        status:
+          - 200

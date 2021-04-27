@@ -1,0 +1,27 @@
+id: unauth-hbase
+
+info:
+  name: Unauthenticated HMaster Info Web UI - HBase
+  author: aravazhimdr
+  severity: high
+  tags: hbase,unauth,database
+  description: Unauthenticated HMaster Info Web UI - HBase.
+  #Port - 16010
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}:16010/master-status"
+      #http://localhost:16010/master-status
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "hbase:namespace"
+          - "hbase:meta"
+          - "HBase Version"
+        condition: and

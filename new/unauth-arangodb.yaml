@@ -1,0 +1,26 @@
+id: unauth-arangodb
+
+info:
+  name: Unauthenticated ArangoDB Web UI
+  author: aravazhimdr
+  severity: high
+  tags: arangodb,unauth,database
+  description: Unauthenticated ArangoDB Web UI.
+  #Port - 8529
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}:8529/_db/_system/_api/version?_=1618645919309"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "application/json"
+        part: header
+      - type: word
+        words:
+          - "arango"
+          - "version"
+        condition: and

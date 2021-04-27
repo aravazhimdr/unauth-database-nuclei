@@ -1,0 +1,28 @@
+id: unauth-cassandra
+
+info:
+  name: Unauthenticated Cassandra DB
+  author: aravazhimdr
+  severity: high
+  reference: https://aravazhi.in
+  tags: cassandra,unauth,network,database
+  #Port - 9042
+  
+network:
+  - inputs:
+      - data: "0400000101000000530003000e4452495645525f56455253494f4e0006332e32352e30000b43514c5f56455253494f4e0005332e342e34000b4452495645525f4e414d450016446174615374617820507974686f6e20447269766572"
+        type: hex
+        read: 9
+      - data: "0400000607000000350000002053454c454354202a2066726f6d2073797374656d5f617574682e726f6c65733b0001340000006400080005bfa28a6ca89a"
+        type: hex
+
+    host:
+      - "{{Hostname}}:9042"
+    read-size: 1024
+    matchers:
+      - type: word
+        words:
+          - "can_login" 
+          - "is_superuser"
+        condition: and
+

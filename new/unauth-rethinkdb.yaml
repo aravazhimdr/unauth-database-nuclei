@@ -1,0 +1,23 @@
+id: unauth-rethinkdb
+
+info:
+  name: Unauthenticated RethinkDB Web UI
+  author: aravazhimdr
+  severity: high
+  tags: rethinkdb,unauth,database
+  description: Unauthenticated RethinkDB Web UI.
+  #Port - 8080
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}:8080/"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "RethinkDB Administration Console"

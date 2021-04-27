@@ -1,0 +1,26 @@
+id: exposed-neo4j-panel
+
+info:
+  name: Exposed Neo4j Panel/Browser
+  author: aravazhimdr
+  severity: info
+  tags: neo4j,database,panel
+  description: Exposed Neo4j Panel/Browser.
+  #Port - 7474
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}:7474/"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "application/json"
+        part: header
+      - type: word
+        words:
+          - "neo4j_version"
+          - "neo4j_edition"
+        condition: and
